@@ -6,3 +6,7 @@ bin
 *.jar
 *.war
 *.ear
+
+# C++ files
+*.o
+*.exe
