@@ -49,13 +49,15 @@ long long getLong() {
 int n;
 int k;
 bool used[100000];
-int total;
+long long total;
+long long tested;
 
 int edges[100000][2];
 int istatus[10000];
 
 int totalRemaining;
 int neighbors[1000];
+int seq[10000];
 
 /*void generate(int vertex, int remain, int minNeighbour) {
     //istatus[n * k - 1 - remain - 1] = vertex;
@@ -77,7 +79,7 @@ int neighbors[1000];
             }
         }
     }
-}*/
+}
 
 int generateTree(int *neighbors, int totalNeighbors, int *remainingIndexes, int level) {
     if (level < totalNeighbors - 1) {
@@ -117,19 +119,65 @@ int generateNeighbors(int vertex, int minVertex, int level, int totalNeighbors) 
     }
 }
 
+*/
+
+
+bool contains(int *data, int value, int count) {
+    FOR(i, count) if (data[i] == value) return true;
+    return false;
+}
+
+void generate(int level) {
+    if (level < n * k - 2) {
+        FOR(i, n * k) {
+            seq[level] = i;
+            generate(level + 1);
+        }
+    } else {
+        tested++;
+        char vused[1000];
+        int counts[100];
+        FOR(i, n *k) vused[i] = false, counts[i] = 0;
+        FOR(i, n * k - 2) counts[seq[i]]++;
+
+        FOR(i, n * k - 2) {
+            int foundV = 0;
+            //while (vused[foundV] || contains(seq + i, foundV, n * k - 2 - i)) foundV++;
+            while (vused[foundV] || counts[foundV] > 0) foundV++;
+            vused[foundV] = true;
+            counts[seq[i]]--;
+            if (foundV / k == seq[i] / k) {
+                //printf("Error: %d %d\n", foundV, seq[i]);
+                return;
+            }
+        }
+        int v1 = 0, v2;
+        while (vused[v1]) v1++;
+        v2 = v1 + 1;
+        while (vused[v2]) v2++;
+        if (v1 / k == v2 / k) {
+            //printf("Error: %d %d\n", v1, v2);
+            return;
+        }
+        total++;
+        if (total % 10000000 == 0) printf("%lld %lld %d %d\n", total, tested, seq[0], seq[1]);
+    }
+}
+
 int main(void) {
     n = getInt();
     k = getInt();
-    total = 0;
+    tested = total = 0;
     FOR(i, ((int)sizeof(used))) used[i] = false;
-    used[0] = true;
+    //used[0] = true;
     totalRemaining = n * k - 1;
+    generate(0);
 
-    FORE(i, 1, totalRemaining) {
+    /*FORE(i, 1, totalRemaining) {
         total += generateNeighbors(0, 1, 0, i);
-    }
+    }*/
     //generate(0, n * k - 1, 0);
-    printf("%d\n", total);
+    printf("%lld\n", total);
 
 
 /*    long long res = 0;
