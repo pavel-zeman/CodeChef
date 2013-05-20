@@ -169,7 +169,8 @@ int main(void) {
                 int newPossibilities[MAXLENGTH];
                 int newPossibilityCount = 0;
                 FOR(k, MAXBITS) FORE(l, k + 1, MAXBITS) {
-                    if (l * l - k * k == diff) {
+                    // we don't care, if the number of bits is very high or very low, because its highly unprobable
+                    if (l * l - k * k == diff && l >= 50 && l <= 110 && k >= 50 && k <= 110) {
                         if (possibilityCount == 0 || (newScore > score && contains(possibilities, k, possibilityCount)) || (newScore < score && contains(possibilities, l, possibilityCount))) {
                             newPossibilities[newPossibilityCount++] = l;
                         }
@@ -183,6 +184,9 @@ int main(void) {
                 if (newPossibilityCount == 1) {
                     length[i] = newPossibilities[0];
                     break;
+                } else if (newPossibilityCount == 0) {
+                    char *a = NULL;
+                    *a = 0;
                 } else {
                     possibilityCount = newPossibilityCount;
                     memcpy(possibilities, newPossibilities, sizeof(int) * possibilityCount);
