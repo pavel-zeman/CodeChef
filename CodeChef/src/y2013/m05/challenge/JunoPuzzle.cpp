@@ -49,42 +49,34 @@ long long getLong() {
 
 int main(void) {
     int t = getInt();
-    //scanf("%d", &t);
     FOR(tt, t) {
         long long v = getLong();
         int n = getInt();
         long long p[MAXITEMS], q[MAXITEMS];
         long long l[MAXITEMS];
 
-        //scanf("%lld %d", &v, &n);
         p[0] = getLong();
         p[1] = getLong();
         long long a0 = getLong(), b0 = getLong(), c0 = getLong(), m0 = getLong();
-        //scanf("%lld %lld %lld %lld %lld %lld", &p[0], &p[1], &a0, &b0, &c0, &m0);
         q[0] = getLong();
         q[1] = getLong();
         long long a1 = getLong(), b1 = getLong(), c1 = getLong(), m1 = getLong();
-        //scanf("%lld %lld %lld %lld %lld %lld", &q[0], &q[1], &a1, &b1, &c1, &m1);
 
         FORE(i, 2, n) {
             p[i] = (((((a0 * a0) % m0) * p[i - 1]) % m0) + ((b0 * p[i - 2]) % m0) + c0) % m0;
             q[i] = (((((a1 * a1) % m1) * q[i - 1]) % m1) + ((b1 * q[i - 2]) % m1) + c1) % m1;
         }
-        //printf("Dimensions: ");
         long long exp = 1;
+        bool isOne = false;
         FOR(i, n) {
-            l[i] = (p[i] * m1 + q[i]) % (MOD - 1);
-            exp = (exp * l[i]) % (MOD - 1);
-            //printf("%lld ", l[i]);
+            l[i] = (((p[i] * m1) % (MOD - 1)) + q[i]) ;
+            exp = (exp * (l[i] % (MOD - 1))) % (MOD - 1);
+            isOne = l[i] == 0;
         }
 
-        /*v %= MOD;
-        FOR(i, n) {
-            char *p = NULL;
-            if (tt > 80000) *p = 'a';
-            v = power(v, l[i]);
-        }*/
-        v = power(v % MOD, exp);
+        if (isOne) v = 1;
+        else if (v % MOD == 0) v = 0;
+        else v = power(v % MOD, exp);
         printf("%d\n", (int)v);
     }
 }
