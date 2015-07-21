@@ -10,3 +10,4 @@ bin
 # C++ files
 *.o
 *.exe
+*.iml
