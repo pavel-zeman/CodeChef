@@ -1,15 +1,6 @@
-//
-//
-#include <stdio.h>
-#include <string.h>
-#include <limits.h>
-#include <math.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <assert.h>
-#include <vector>
-#include <map>
-
+// Description
+// URL
+#include <bits/stdc++.h>
 using namespace std;
 
 #define FOR(c, m) for(int c=0;c<(int)(m);c++)
