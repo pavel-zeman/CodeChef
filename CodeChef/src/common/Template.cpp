@@ -60,6 +60,12 @@ template <class type> void print(type a) {
     putc_unlocked('\n', stdout);
 }
 
+void printString(const char *str) {
+    while (*str) putc_unlocked(*str++, stdout);
+    putc_unlocked('\n', stdout);
+}
+
+
 void fail() {
     *((char *)0) = 0;
 }
