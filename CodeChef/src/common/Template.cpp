@@ -5,6 +5,7 @@ using namespace std;
 
 #define FOR(c, m) for(int c=0;c<(int)(m);c++)
 #define FORE(c, f, t) for(int c=(f);c<(t);c++)
+#define LLI long long int
 
 
 char ccc = 0;
@@ -17,6 +18,18 @@ int getInt() {
     }
     return r;
 }
+
+int getString(char *start) {
+    char *data = start;
+    while (!(ccc > ' ' && ccc <= '~')) ccc = getc_unlocked(stdin);
+    while (ccc > ' ' && ccc <= '~') {
+        *data++ = ccc;
+        ccc = getc_unlocked(stdin);
+    }
+    *data = 0;
+    return data - start;
+}
+
 
 int getSignedInt() {
     int r = 0;
@@ -65,17 +78,8 @@ void printString(const char *str) {
     putc_unlocked('\n', stdout);
 }
 
-
 void fail() {
     *((char *)0) = 0;
-}
-
-template <class type> type mx(type a, type b) {
-    return a > b ? a : b;
-}
-
-template <class type> type mn(type a, type b) {
-    return a < b ? a : b;
 }
 
 
