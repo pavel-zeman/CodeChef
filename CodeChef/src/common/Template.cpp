@@ -6,6 +6,7 @@ using namespace std;
 #define FOR(c, m) for(int c=0;c<(int)(m);c++)
 #define FORE(c, f, t) for(int c=(f);c<(t);c++)
 #define LLI long long int
+#define MOD 1000000007
 
 
 char ccc = 0;
@@ -76,6 +77,17 @@ template <class type> void print(type a) {
 void printString(const char *str) {
     while (*str) putc_unlocked(*str++, stdout);
     putc_unlocked('\n', stdout);
+}
+
+int power(int a, int b) {
+    int sq = a;
+    int result = 1;
+    while (b > 0) {
+        if ((b & 1) == 1) result = result * (LLI)sq % MOD;
+        sq = sq * (LLI)sq % MOD;
+        b >>= 1;
+    }
+    return result;
 }
 
 void fail() {
