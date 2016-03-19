@@ -90,6 +90,10 @@ int power(int a, int b) {
     return result;
 }
 
+int inv(int a) {
+    return power(a, MOD - 2);
+}
+
 void fail() {
     *((char *)0) = 0;
 }
