@@ -98,6 +98,10 @@ void fail() {
     *((char *)0) = 0;
 }
 
+double cpu() {
+    return clock() / (double)CLOCKS_PER_SEC;
+}
+
 
 int main(void) {
     int t = getInt();
