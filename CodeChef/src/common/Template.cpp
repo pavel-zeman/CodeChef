@@ -94,6 +94,10 @@ int inv(int a) {
     return power(a, MOD - 2);
 }
 
+template <class type> type gcd(type a, type b) {
+    return b == 0 ? a : gcd(b, a % b);
+}
+
 void fail() {
     *((char *)0) = 0;
 }
