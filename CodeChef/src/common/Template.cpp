@@ -4,7 +4,7 @@
 using namespace std;
 
 #define FOR(c, m) for(int c=0;c<(int)(m);c++)
-#define FORE(c, f, t) for(int c=(f);c<(t);c++)
+#define FORE(c, f, t) for(int c=(f);c<(int)(t);c++)
 #define LLI long long int
 #define MOD 1000000007
 
